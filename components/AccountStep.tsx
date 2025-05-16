@@ -121,7 +121,7 @@ const AccountStep: React.FC = () => {
         />
         {errors.taxCode && <div style={{ color: 'red', fontSize: 12 }}>{errors.taxCode}</div>}
       </div>
-      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600 }}>
+      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600, fontFamily: 'inherit' }}>
         Continua
       </button>
     </div>

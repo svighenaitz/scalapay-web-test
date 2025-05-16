@@ -109,7 +109,7 @@ const AddressStep: React.FC = () => {
           Dichiaro di essere una PEP
         </label>
       </div>
-      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600 }}>
+      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600, fontFamily: 'inherit' }}>
         Salva
       </button>
     </div>

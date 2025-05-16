@@ -19,10 +19,16 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input::placeholder,
+textarea::placeholder {
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+}
+
 
 * {
   box-sizing: border-box;
