@@ -1,10 +1,19 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useFormStore } from '../store/formSlice';
+import { validateAddress } from '../validation/validate';
+
+const countryOptions = [
+  { code: 'IT', label: 'Italia' },
+  { code: 'ES', label: 'Spagna' },
+  { code: 'DE', label: 'Germania' },
+  { code: 'PT', label: 'Portogallo' },
+  { code: 'FR', label: 'Francia' },
+];
 
 const AddressStep: React.FC = () => {
   const { address, errors, updateAddress, setError } = useFormStore();
 
-  const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleAddressChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     updateAddress({ [e.target.name]: e.target.value });
     if (errors[e.target.name]) setError(e.target.name, '');
   };
@@ -26,12 +35,13 @@ const AddressStep: React.FC = () => {
           style={{ flex: 2, marginBottom: 8 }}
         />
         <input
-          type="text"
+          type="number"
           name="addressNumber"
           placeholder="N°"
           value={address.addressNumber}
           onChange={handleAddressChange}
           style={{ flex: 1, marginBottom: 8 }}
+          min={1}
         />
       </div>
       {errors.address && <div style={{ color: 'red', fontSize: 12 }}>{errors.address}</div>}
@@ -65,14 +75,17 @@ const AddressStep: React.FC = () => {
           onChange={handleAddressChange}
           style={{ flex: 1, marginBottom: 8 }}
         />
-        <input
-          type="text"
+        <select
           name="country"
-          placeholder="Nazione"
           value={address.country}
           onChange={handleAddressChange}
           style={{ flex: 1, marginBottom: 8 }}
-        />
+        >
+          <option value="">Seleziona Nazione</option>
+          {countryOptions.map((opt) => (
+            <option key={opt.code} value={opt.code}>{opt.label}</option>
+          ))}
+        </select>
       </div>
       {errors.city && <div style={{ color: 'red', fontSize: 12 }}>{errors.city}</div>}
       {errors.country && <div style={{ color: 'red', fontSize: 12 }}>{errors.country}</div>}

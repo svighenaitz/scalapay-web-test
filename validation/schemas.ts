@@ -39,13 +39,22 @@ export const dateSchema = z.string()
     })
   );
 
+// Address validation updates
+const countryOptions = ["IT", "ES", "DE", "PT", "FR"] as const;
+
 export const addressSchema = z.string()
   .transform(val => val.trim())
-  .pipe(z.string().min(1, 'Indirizzo richiesto'));
+  .pipe(z.string()
+    .min(5, 'Indirizzo minimo 5 caratteri')
+    .regex(/^[A-Za-zÀ-ÿ'\- ]+$/, 'L’indirizzo può contenere solo lettere, spazi, apostrofi e trattini')
+  );
 
-export const addressNumberSchema = z.string()
-  .transform(val => val.trim())
-  .pipe(z.string().min(1, 'Numero civico richiesto'));
+export const addressNumberSchema = z.preprocess(
+  (val) => typeof val === 'string' ? parseInt(val, 10) : val,
+  z.number({ invalid_type_error: 'Numero civico richiesto', required_error: 'Numero civico richiesto' })
+    .int('Numero civico deve essere un intero')
+    .min(1, 'Numero civico richiesto')
+);
 
 export const postalCodeSchema = z.string()
   .transform(val => val.trim())
@@ -59,9 +68,10 @@ export const citySchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string().min(1, 'Città richiesta'));
 
-export const countrySchema = z.string()
-  .transform(val => val.trim())
-  .pipe(z.string().min(1, 'Nazione richiesta'));
+export const countrySchema = z.enum(countryOptions, {
+  required_error: 'Nazione richiesta',
+  invalid_type_error: 'Nazione non valida',
+});
 
 export const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]+$/;
 
