@@ -54,22 +54,40 @@ const Form: React.FC = () => {
     }
   };
 
-  const handleSave = async (e: FormEvent) => {
-    e.preventDefault();
-    const result = await validateAddress(address);
+  const submitFormData = async (data: any) => {
+  try {
+    const resp = await fetch('/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    return resp.ok;
+  } catch (err) {
+    return false;
+  }
+};
 
-    if (result.success) {
-      // Submit the form
+const handleSave = async (e: FormEvent) => {
+  e.preventDefault();
+  const result = await validateAddress(address);
+
+  if (result.success) {
+    // Submit the form to /submit with all form data
+    const ok = await submitFormData({ ...account, ...address });
+    if (ok) {
       alert('Form inviato con successo!');
-    } else if (result.errors) {
-      clearErrors();
-      Object.entries(result.errors).forEach(([field, message]) => {
-        if (typeof message === 'string') {
-          setError(field, message);
-        }
-      });
+    } else {
+      alert('Errore nell’invio del form');
     }
-  };
+  } else if (result.errors) {
+    clearErrors();
+    Object.entries(result.errors).forEach(([field, message]) => {
+      if (typeof message === 'string') {
+        setError(field, message);
+      }
+    });
+  }
+};
 
   return (
     <div style={{ maxWidth: 400, margin: '0 auto', padding: 16 }}>
