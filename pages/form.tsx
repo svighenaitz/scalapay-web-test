@@ -27,10 +27,13 @@ const Form: React.FC = () => {
     if (urlStep === '1' || urlStep === '2') {
       setStep(Number(urlStep) as 1 | 2);
     } else if (!urlStep) {
-      // If no step in URL, set to default step 1
-      setStep(1);
+      // If no step in URL, update URL to step=1
+      router.replace({
+        pathname: router.pathname,
+        query: { ...router.query, step: 1 },
+      }, undefined, { shallow: true });
     }
-  }, [router.query.step, setStep]);
+  }, [router.query.step, setStep, router]);
 
 
   // --- Navigation & Validation ---
@@ -43,7 +46,11 @@ const Form: React.FC = () => {
     if (result.success && result.data) {
       // Update the store with the validated and transformed data
       updateAccount(result.data);
-      setStep(2);
+      // Update URL to step=2, which will trigger the effect to update Zustand
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, step: 2 },
+      });
     } else if (result.errors) {
       clearErrors();
       Object.entries(result.errors).forEach(([field, message]) => {
