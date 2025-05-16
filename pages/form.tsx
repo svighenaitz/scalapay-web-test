@@ -34,12 +34,12 @@ const Form: React.FC = () => {
 
 
   // --- Navigation & Validation ---
-  const handleContinue = (e: FormEvent) => {
+  const handleContinue = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     // The schema will handle trimming and validation
-    const result = validateAccount(account);
-    
+    const result = await validateAccount(account);
+
     if (result.success && result.data) {
       // Update the store with the validated and transformed data
       updateAccount(result.data);
@@ -54,10 +54,10 @@ const Form: React.FC = () => {
     }
   };
 
-  const handleSave = (e: FormEvent) => {
+  const handleSave = async (e: FormEvent) => {
     e.preventDefault();
-    const result = validateAddress(address);
-    
+    const result = await validateAddress(address);
+
     if (result.success) {
       // Submit the form
       alert('Form inviato con successo!');

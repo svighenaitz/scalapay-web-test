@@ -1,3 +1,4 @@
+import { validateFiscalCode } from './validate';
 import { z } from 'zod';
 
 export const emailSchema = z.string()
@@ -7,13 +8,21 @@ export const emailSchema = z.string()
     .email('Email non valida')
   );
 
+
+
 export const taxCodeSchema = z.string()
-  .transform(val => val.trim().toUpperCase()) // Also convert to uppercase for consistency
+  .transform(val => val.trim().toUpperCase())
   .pipe(z.string()
     .min(1, 'Codice fiscale richiesto')
     .regex(
       /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$/,
       'Codice fiscale non valido'
+    )
+    .refine(
+      async (val) => await validateFiscalCode(val),
+      {
+        message: 'Codice fiscale non valido o non esistente'
+      }
     )
   );
 
