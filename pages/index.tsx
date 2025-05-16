@@ -30,7 +30,7 @@ const Home: React.FC<HomeProps> = () => {
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
         <main className={styles.main}>
-          <Link href="/form">START FILLING FORM</Link>
+          <Link href={{ pathname: '/form', query: { step: 1 } }}>START FILLING FORM</Link>
         </main>
         <footer className={styles.footer}>
           
