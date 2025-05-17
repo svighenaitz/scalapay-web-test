@@ -13,13 +13,14 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.page}>
-  <main className={styles.main}>
-    <Link href={{ pathname: '/form', query: { step: 1 } }}>START FILLING FORM</Link>
-  </main>
-  <footer className={styles.footer}>
-    
-  </footer>
-</div>
+        <main className={styles.main}>
+          <h1>Welcome to Scalapay Form Test</h1>
+          <Link href={{ pathname: '/form', query: { step: 1 } }}>START FILLING FORM</Link>
+        </main>
+        <footer className={styles.footer}>
+
+        </footer>
+      </div>
     </>
   );
 };
