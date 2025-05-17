@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { formSchema, accountSchema, addressFormSchema } from './schemas';
 
-export type ValidationResult<T = any> = {
+export type ValidationResult<T = unknown> = {
   success: boolean;
   errors?: Record<string, string>;
   data?: T; // The validated and transformed data

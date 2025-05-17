@@ -12,7 +12,6 @@ const Form: React.FC = () => {
     step,
     account,
     address,
-
     setStep,
     setError,
     clearErrors,
