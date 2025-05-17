@@ -11,7 +11,11 @@ const countryOptions = [
   { code: 'FR', label: 'Francia' },
 ];
 
-const AddressStep: React.FC = () => {
+interface AddressStepProps {
+  loading?: boolean;
+}
+
+const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
   const { address, errors, updateAddress, setError } = useFormStore();
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -110,8 +114,8 @@ const AddressStep: React.FC = () => {
           Dichiaro di essere una PEP
         </label>
       </div>
-      <button type="submit" className={styles.button}>
-        Salva
+      <button type="submit" className={styles.button} disabled={loading}>
+        {loading ? 'Attendi...' : 'Salva'}        
       </button>
     </div>
   );

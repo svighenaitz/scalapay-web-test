@@ -9,6 +9,7 @@ import AddressStep from '../components/AddressStep';
 import formStyles from '../components/Form.module.css';
 
 const Form: React.FC = () => {
+  const [loading, setLoading] = React.useState(false);
   const {
     step,
     account,
@@ -38,6 +39,7 @@ const Form: React.FC = () => {
 
   // --- Navigation & Validation ---
   const handleContinue = async (e: FormEvent) => {
+  setLoading(true);
     e.preventDefault();
 
     // The schema will handle trimming and validation
@@ -59,7 +61,8 @@ const Form: React.FC = () => {
         }
       });
     }
-  };
+    setLoading(false);
+};
 
   const submitFormData = async (data: unknown) => {
     try {
@@ -72,9 +75,11 @@ const Form: React.FC = () => {
     } catch {
       return false;
     }
-  };
+    setLoading(false);
+};
 
   const handleSave = async (e: FormEvent) => {
+  setLoading(true);
     e.preventDefault();
     const result = await validateAddress(address);
 
@@ -94,7 +99,8 @@ const Form: React.FC = () => {
         }
       });
     }
-  };
+    setLoading(false);
+};
 
   return (
     <div className={formStyles.container}>
@@ -105,12 +111,12 @@ const Form: React.FC = () => {
           <div className={formStyles.merchantDesc}>Paga il tuo ordine in un massimo di 36 rate</div>
         </div>
         <form onSubmit={step === 1 ? handleContinue : handleSave}>
-          {step === 1 ? <AccountStep /> : <AddressStep />}
-
+          {step === 1 ? <AccountStep loading={loading} /> : <AddressStep loading={loading} />}
         </form>
       </div>
     </div>
   );
+  setLoading(false);
 };
 
 export default Form;

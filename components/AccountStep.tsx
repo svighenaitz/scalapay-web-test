@@ -9,7 +9,11 @@ import styles from './AccountStep.module.css';
 
 const MINIMUM_AGE = 18;
 
-const AccountStep: React.FC = () => {
+interface AccountStepProps {
+  loading?: boolean;
+}
+
+const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
   const { account, errors, updateAccount, setError } = useFormStore();
   
   // Calculate the min and max dates (120 years ago and 18 years ago from today)
@@ -122,8 +126,8 @@ const AccountStep: React.FC = () => {
         />
         <FieldError name="taxCode" />
       </div>
-      <button type="submit" className={styles.button}>
-        Continua
+      <button type="submit" className={styles.button} disabled={loading}>
+          {loading ? 'Attendi...' : 'Continua'}        
       </button>
     </div>
   );
