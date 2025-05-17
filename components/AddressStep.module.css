@@ -1,0 +1,46 @@
+.container {
+  /* For the main AddressStep wrapper */
+}
+
+.flex {
+  display: flex;
+  gap: 8px;
+}
+
+.flexAlignCenter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.inputFull {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.inputHalf {
+  flex: 1;
+  margin-bottom: 8px;
+}
+
+.inputDouble {
+  flex: 2;
+  margin-bottom: 8px;
+}
+
+.button {
+  width: 100%;
+  margin-top: 12px;
+  background: #6366f1;
+  color: #fff;
+  padding: 12px 0;
+  border-radius: 24px;
+  border: 0;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.label {
+  flex: 1;
+}

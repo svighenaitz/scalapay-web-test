@@ -6,6 +6,7 @@ import { useFormStore } from '../store/formSlice';
 import { validateAccount, validateAddress } from '../validation/validate';
 import AccountStep from '../components/AccountStep';
 import AddressStep from '../components/AddressStep';
+import formStyles from '../components/Form.module.css';
 
 const Form: React.FC = () => {
   const {
@@ -96,12 +97,12 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: 16 }}>
-      <h2>Secure checkout <span role="img" aria-label="love">♥</span> scalapay</h2>
-      <div style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0001' }}>
-        <div style={{ marginBottom: 24 }}>
-          <b>Merchant</b>
-          <div style={{ fontSize: 14, color: '#888' }}>Paga il tuo ordine in un massimo di 36 rate</div>
+    <div className={formStyles.container}>
+      <h2 className={formStyles.heading}>Secure checkout <span role="img" aria-label="love">♥</span> scalapay</h2>
+      <div className={formStyles.card}>
+        <div className={formStyles.merchant}>
+          <b className={formStyles.merchantTitle}>Merchant</b>
+          <div className={formStyles.merchantDesc}>Paga il tuo ordine in un massimo di 36 rate</div>
         </div>
         <form onSubmit={step === 1 ? handleContinue : handleSave}>
           {step === 1 ? <AccountStep /> : <AddressStep />}

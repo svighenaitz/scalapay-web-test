@@ -43,7 +43,7 @@ const AccountStep: React.FC = () => {
           placeholder="Email"
           value={account.email}
           onChange={handleAccountChange}
-          style={{ width: '100%', marginBottom: 8 }}
+          className={styles.inputFull}
         />
         <FieldError name="email" />
       </div>
@@ -54,7 +54,7 @@ const AccountStep: React.FC = () => {
           placeholder="Nome"
           value={account.firstName}
           onChange={handleAccountChange}
-          style={{ width: '100%', marginBottom: 8 }}
+          className={styles.inputFull}
         />
         <FieldError name="firstName" />
       </div>
@@ -65,7 +65,7 @@ const AccountStep: React.FC = () => {
           placeholder="Cognome"
           value={account.lastName}
           onChange={handleAccountChange}
-          style={{ width: '100%', marginBottom: 8 }}
+          className={styles.inputFull}
         />
         <FieldError name="lastName" />
       </div>
@@ -118,11 +118,11 @@ const AccountStep: React.FC = () => {
           placeholder="Codice Fiscale"
           value={account.taxCode}
           onChange={handleAccountChange}
-          style={{ width: '100%', marginBottom: 8 }}
+          className={styles.inputFull}
         />
         <FieldError name="taxCode" />
       </div>
-      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600, fontFamily: 'inherit' }}>
+      <button type="submit" className={styles.button}>
         Continua
       </button>
     </div>

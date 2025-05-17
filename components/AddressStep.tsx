@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import FieldError from './FieldError';
 import { useFormStore } from '../store/formSlice';
+import styles from './AddressStep.module.css';
 
 const countryOptions = [
   { code: 'IT', label: 'Italia' },
@@ -23,16 +24,16 @@ const AddressStep: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h3>Indirizzo di residenza</h3>
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div className={styles.flex}>
         <input
           type="text"
           name="address"
           placeholder="Via, piazza, etc"
           value={address.address}
           onChange={handleAddressChange}
-          style={{ flex: 2, marginBottom: 8 }}
+          className={styles.inputDouble}
         />
         <input
           type="number"
@@ -40,20 +41,20 @@ const AddressStep: React.FC = () => {
           placeholder="N°"
           value={address.addressNumber}
           onChange={handleAddressChange}
-          style={{ flex: 1, marginBottom: 8 }}
+          className={styles.inputHalf}
           min={1}
         />
       </div>
       <FieldError name="address" />
       <FieldError name="addressNumber" />
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div className={styles.flex}>
         <input
           type="text"
           name="postalCode"
           placeholder="CAP"
           value={address.postalCode}
           onChange={handleAddressChange}
-          style={{ flex: 1, marginBottom: 8 }}
+          className={styles.inputHalf}
         />
         <input
           type="text"
@@ -61,25 +62,25 @@ const AddressStep: React.FC = () => {
           placeholder="Provincia"
           value={address.province}
           onChange={handleAddressChange}
-          style={{ flex: 1, marginBottom: 8 }}
+          className={styles.inputHalf}
         />
       </div>
       <FieldError name="postalCode" />
       <FieldError name="province" />
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div className={styles.flex}>
         <input
           type="text"
           name="city"
           placeholder="Città"
           value={address.city}
           onChange={handleAddressChange}
-          style={{ flex: 1, marginBottom: 8 }}
+          className={styles.inputHalf}
         />
         <select
           name="country"
           value={address.country}
           onChange={handleAddressChange}
-          style={{ flex: 1, marginBottom: 8 }}
+          className={styles.inputHalf}
         >
           <option value="">Seleziona Nazione</option>
           {countryOptions.map((opt) => (
@@ -89,8 +90,8 @@ const AddressStep: React.FC = () => {
       </div>
       <FieldError name="city" />
       <FieldError name="country" />
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '12px 0' }}>
-        <label style={{ flex: 1 }}>
+      <div className={styles.flexAlignCenter}>
+        <label className={styles.label}>
           <input
             type="checkbox"
             name="currentlyLiveHere"
@@ -99,7 +100,7 @@ const AddressStep: React.FC = () => {
           />{' '}
           I currently live here
         </label>
-        <label style={{ flex: 1 }}>
+        <label className={styles.label}>
           <input
             type="checkbox"
             name="isPEP"
@@ -109,7 +110,7 @@ const AddressStep: React.FC = () => {
           Dichiaro di essere una PEP
         </label>
       </div>
-      <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600, fontFamily: 'inherit' }}>
+      <button type="submit" className={styles.button}>
         Salva
       </button>
     </div>
