@@ -31,7 +31,7 @@ const Form: React.FC = () => {
       router.replace({
         pathname: router.pathname,
         query: { ...router.query, step: 1 },
-      }, undefined, { shallow: true });
+      }, undefined);
     }
   }, [router.query.step, setStep, router]);
 
@@ -62,39 +62,39 @@ const Form: React.FC = () => {
   };
 
   const submitFormData = async (data: any) => {
-  try {
-    const resp = await fetch('/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    return resp.ok;
-  } catch (err) {
-    return false;
-  }
-};
-
-const handleSave = async (e: FormEvent) => {
-  e.preventDefault();
-  const result = await validateAddress(address);
-
-  if (result.success) {
-    // Submit the form to /submit with all form data
-    const ok = await submitFormData({ ...account, ...address });
-    if (ok) {
-      alert('Form inviato con successo!');
-    } else {
-      alert('Errore nell’invio del form');
+    try {
+      const resp = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return resp.ok;
+    } catch (err) {
+      return false;
     }
-  } else if (result.errors) {
-    clearErrors();
-    Object.entries(result.errors).forEach(([field, message]) => {
-      if (typeof message === 'string') {
-        setError(field, message);
+  };
+
+  const handleSave = async (e: FormEvent) => {
+    e.preventDefault();
+    const result = await validateAddress(address);
+
+    if (result.success) {
+      // Submit the form to /submit with all form data
+      const ok = await submitFormData({ ...account, ...address });
+      if (ok) {
+        alert('Form inviato con successo!');
+      } else {
+        alert('Errore nell’invio del form');
       }
-    });
-  }
-};
+    } else if (result.errors) {
+      clearErrors();
+      Object.entries(result.errors).forEach(([field, message]) => {
+        if (typeof message === 'string') {
+          setError(field, message);
+        }
+      });
+    }
+  };
 
   return (
     <div style={{ maxWidth: 400, margin: '0 auto', padding: 16 }}>
@@ -106,7 +106,7 @@ const handleSave = async (e: FormEvent) => {
         </div>
         <form onSubmit={step === 1 ? handleContinue : handleSave}>
           {step === 1 ? <AccountStep /> : <AddressStep />}
-          
+
         </form>
       </div>
     </div>

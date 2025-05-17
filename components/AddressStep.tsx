@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import FieldError from './FieldError';
 import { useFormStore } from '../store/formSlice';
 import { validateAddress } from '../validation/validate';
 
@@ -44,8 +45,8 @@ const AddressStep: React.FC = () => {
           min={1}
         />
       </div>
-      {errors.address && <div style={{ color: 'red', fontSize: 12 }}>{errors.address}</div>}
-      {errors.addressNumber && <div style={{ color: 'red', fontSize: 12 }}>{errors.addressNumber}</div>}
+      <FieldError name="address" />
+      <FieldError name="addressNumber" />
       <div style={{ display: 'flex', gap: 8 }}>
         <input
           type="text"
@@ -64,8 +65,8 @@ const AddressStep: React.FC = () => {
           style={{ flex: 1, marginBottom: 8 }}
         />
       </div>
-      {errors.postalCode && <div style={{ color: 'red', fontSize: 12 }}>{errors.postalCode}</div>}
-      {errors.province && <div style={{ color: 'red', fontSize: 12 }}>{errors.province}</div>}
+      <FieldError name="postalCode" />
+      <FieldError name="province" />
       <div style={{ display: 'flex', gap: 8 }}>
         <input
           type="text"
@@ -87,8 +88,8 @@ const AddressStep: React.FC = () => {
           ))}
         </select>
       </div>
-      {errors.city && <div style={{ color: 'red', fontSize: 12 }}>{errors.city}</div>}
-      {errors.country && <div style={{ color: 'red', fontSize: 12 }}>{errors.country}</div>}
+      <FieldError name="city" />
+      <FieldError name="country" />
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '12px 0' }}>
         <label style={{ flex: 1 }}>
           <input

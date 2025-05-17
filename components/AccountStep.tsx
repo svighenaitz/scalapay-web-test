@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useMemo } from 'react';
+import FieldError from './FieldError';
 import { useFormStore } from '../store/formSlice';
 import DatePicker from 'react-datepicker';
 import { it } from 'date-fns/locale';
@@ -44,7 +45,7 @@ const AccountStep: React.FC = () => {
           onChange={handleAccountChange}
           style={{ width: '100%', marginBottom: 8 }}
         />
-        {errors.email && <div style={{ color: 'red', fontSize: 12 }}>{errors.email}</div>}
+        <FieldError name="email" />
       </div>
       <div>
         <input
@@ -55,7 +56,7 @@ const AccountStep: React.FC = () => {
           onChange={handleAccountChange}
           style={{ width: '100%', marginBottom: 8 }}
         />
-        {errors.firstName && <div style={{ color: 'red', fontSize: 12 }}>{errors.firstName}</div>}
+        <FieldError name="firstName" />
       </div>
       <div>
         <input
@@ -66,7 +67,7 @@ const AccountStep: React.FC = () => {
           onChange={handleAccountChange}
           style={{ width: '100%', marginBottom: 8 }}
         />
-        {errors.lastName && <div style={{ color: 'red', fontSize: 12 }}>{errors.lastName}</div>}
+        <FieldError name="lastName" />
       </div>
       <div>
         <div className={styles['date-picker-container']}>
@@ -108,7 +109,7 @@ const AccountStep: React.FC = () => {
             openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}
           />
         </div>
-        {errors.birthDate && <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>{errors.birthDate}</div>}
+        <FieldError name="birthDate" />
       </div>
       <div>
         <input
@@ -119,7 +120,7 @@ const AccountStep: React.FC = () => {
           onChange={handleAccountChange}
           style={{ width: '100%', marginBottom: 8 }}
         />
-        {errors.taxCode && <div style={{ color: 'red', fontSize: 12 }}>{errors.taxCode}</div>}
+        <FieldError name="taxCode" />
       </div>
       <button type="submit" style={{ width: '100%', marginTop: 12, background: '#6366f1', color: '#fff', padding: '12px 0', borderRadius: 24, border: 0, fontWeight: 600, fontFamily: 'inherit' }}>
         Continua
