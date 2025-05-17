@@ -12,7 +12,7 @@ const Form: React.FC = () => {
     step,
     account,
     address,
-    errors,
+
     setStep,
     setError,
     clearErrors,
@@ -61,7 +61,7 @@ const Form: React.FC = () => {
     }
   };
 
-  const submitFormData = async (data: any) => {
+  const submitFormData = async (data: unknown) => {
     try {
       const resp = await fetch('/submit', {
         method: 'POST',
@@ -69,7 +69,7 @@ const Form: React.FC = () => {
         body: JSON.stringify(data),
       });
       return resp.ok;
-    } catch (err) {
+    } catch {
       return false;
     }
   };

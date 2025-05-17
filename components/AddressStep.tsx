@@ -1,7 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import FieldError from './FieldError';
 import { useFormStore } from '../store/formSlice';
-import { validateAddress } from '../validation/validate';
 
 const countryOptions = [
   { code: 'IT', label: 'Italia' },

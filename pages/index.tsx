@@ -3,9 +3,7 @@ import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import React from 'react';
 
-interface HomeProps {}
-
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC = () => {
   return (
     <>
       <Head>

@@ -3,7 +3,7 @@ import FieldError from './FieldError';
 import { useFormStore } from '../store/formSlice';
 import DatePicker from 'react-datepicker';
 import { it } from 'date-fns/locale';
-import { subYears, isBefore, format } from 'date-fns';
+import { subYears, isBefore } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './AccountStep.module.css';
 
