@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "eslint": "eslint"
+    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@types/flatpickr": "^3.1.4",
@@ -28,6 +28,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "typescript": "^5"

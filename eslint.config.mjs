@@ -20,5 +20,9 @@ export default [
       "public/"
     ]
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:jsx-a11y/recommended"
+  ),
 ];
