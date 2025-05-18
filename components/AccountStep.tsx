@@ -1,11 +1,15 @@
-import React, { ChangeEvent, useMemo } from 'react';
-import FieldError from './FieldError';
+import React, { useMemo } from 'react';
 import { useFormStore } from '../store/formSlice';
 import DatePicker from 'react-datepicker';
 import { it } from 'date-fns/locale';
 import { subYears, isBefore } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './AccountStep.module.css';
+import FormStep from './FormStep';
+import FormInput from './FormInput';
+import FormButton from './FormButton';
+import { useFormFieldChange } from './useFormFieldChange';
+import FieldError from './FieldError';
 
 const MINIMUM_AGE = 18;
 
@@ -15,6 +19,7 @@ interface AccountStepProps {
 
 const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
   const { account, errors, updateAccount, setError } = useFormStore();
+  const handleAccountChange = useFormFieldChange(updateAccount, errors, setError);
   
   // Calculate the min and max dates (120 years ago and 18 years ago from today)
   const minDate = useMemo(() => subYears(new Date(), 120), []);
@@ -32,62 +37,44 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
     ? isBefore(new Date(account.birthDate), maxDate)
     : false;
 
-  const handleAccountChange = (e: ChangeEvent<HTMLInputElement>) => {
-    updateAccount({ [e.target.name]: e.target.value });
-    if (errors[e.target.name]) setError(e.target.name, '');
-  };
-
   return (
-    <div>
-      <h3>Crea account</h3>
-      <div>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={account.email}
-          onChange={handleAccountChange}
-          className={styles.inputFull}
-        />
-        <FieldError name="email" />
-      </div>
-      <div>
-        <input
-          type="text"
-          name="firstName"
-          placeholder="Nome"
-          value={account.firstName}
-          onChange={handleAccountChange}
-          className={styles.inputFull}
-        />
-        <FieldError name="firstName" />
-      </div>
-      <div>
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Cognome"
-          value={account.lastName}
-          onChange={handleAccountChange}
-          className={styles.inputFull}
-        />
-        <FieldError name="lastName" />
-      </div>
+    <FormStep heading="Crea account">
+      <FormInput
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={account.email}
+        onChange={handleAccountChange}
+        errorName="email"
+        className={styles.inputFull}
+      />
+      <FormInput
+        type="text"
+        name="firstName"
+        placeholder="Nome"
+        value={account.firstName}
+        onChange={handleAccountChange}
+        errorName="firstName"
+        className={styles.inputFull}
+      />
+      <FormInput
+        type="text"
+        name="lastName"
+        placeholder="Cognome"
+        value={account.lastName}
+        onChange={handleAccountChange}
+        errorName="lastName"
+        className={styles.inputFull}
+      />
       <div>
         <div className={styles['date-picker-container']}>
           <DatePicker
             selected={account.birthDate ? new Date(account.birthDate) : null}
             onChange={(date: Date | null) => {
-              // Clear any existing errors
               if (errors.birthDate) setError('birthDate', '');
-              
-              // Update the form state with the new date or empty string
-              updateAccount({ 
-                birthDate: date ? date.toISOString().split('T')[0] : '' 
-              });
+              updateAccount({ birthDate: date ? date.toISOString().split('T')[0] : '' });
             }}
             onBlur={() => {
-              // Trigger validation when the field loses focus
               if (!account.birthDate) {
                 setError('birthDate', 'Data di nascita richiesta');
               } else if (!isOver18) {
@@ -113,23 +100,26 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
             openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}
           />
         </div>
+        {/* Keep FieldError for birthDate for clarity */}
+        {/* You could also wrap this in a FormInput abstraction if needed */}
         <FieldError name="birthDate" />
       </div>
-      <div>
-        <input
-          type="text"
-          name="taxCode"
-          placeholder="Codice Fiscale"
-          value={account.taxCode}
-          onChange={handleAccountChange}
-          className={styles.inputFull}
-        />
-        <FieldError name="taxCode" />
-      </div>
-      <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? 'Attendi...' : 'Continua'}        
-      </button>
-    </div>
+      <FormInput
+        type="text"
+        name="taxCode"
+        placeholder="Codice Fiscale"
+        value={account.taxCode}
+        onChange={handleAccountChange}
+        errorName="taxCode"
+        className={styles.inputFull}
+      />
+      <FormButton
+        loading={loading}
+        label="Continua"
+        loadingLabel="Attendi..."
+        className={styles.button}
+      />
+    </FormStep>
   );
 };
 
