@@ -8,17 +8,21 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement | HT
   className?: string;
 }
 
+import { useFormStore } from '../store/formSlice';
+
 const FormInput: React.FC<FormInputProps> = ({ errorName, as = 'input', options, className, ...props }) => {
+  const { errors } = useFormStore();
+  const hasError = Boolean(errors && errors[errorName]);
   return (
     <div>
       {as === 'select' ? (
-        <select {...props} className={className}>
+        <select {...props} className={className} aria-invalid={hasError}>
           {options && options.map(opt => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
       ) : (
-        <input {...props} className={className} />
+        <input {...props} className={className} aria-invalid={hasError} />
       )}
       <FieldError name={errorName} />
     </div>
