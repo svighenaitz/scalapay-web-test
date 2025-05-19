@@ -52,18 +52,18 @@ export const validationMessages = {
 export const emailSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(1, validationMessages.email.required)
     .email(validationMessages.email.invalid)
+    .min(1, validationMessages.email.required)
   );
 
 export const taxCodeSchema = z.string()
   .transform(val => val.trim().toUpperCase())
   .pipe(z.string()
-    .min(1, validationMessages.taxCode.required)
     .regex(
       /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$/,
       validationMessages.taxCode.invalid
     )
+    .min(1, validationMessages.taxCode.required)
     .refine(
       async (val) => await validateFiscalCode(val),
       {
@@ -91,8 +91,8 @@ const countryOptions = ["IT", "ES", "DE", "PT", "FR"] as const;
 export const addressSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(5, validationMessages.address.min)
     .regex(/^[A-Za-zÀ-ÿ'\- ]+$/, validationMessages.address.invalid)
+    .min(5, validationMessages.address.min)
   );
 
 export const addressNumberSchema = z.preprocess(
@@ -124,15 +124,15 @@ export const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]+$/;
 export const firstNameSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(2, validationMessages.firstName.min)
     .regex(nameRegex, validationMessages.firstName.invalid)
+    .min(2, validationMessages.firstName.min)
   );
 
 export const lastNameSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(2, validationMessages.lastName.min)
     .regex(nameRegex, validationMessages.lastName.invalid)
+    .min(2, validationMessages.lastName.min)
   );
 
 // Combined schemas
