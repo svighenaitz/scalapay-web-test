@@ -34,6 +34,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           onChange={handleChange}
           errorName="address"
           className={styles.inputDouble}
+          data-testid="address-address-input"
         />
         <FormInput
           type="number"
@@ -44,6 +45,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           errorName="addressNumber"
           className={styles.inputHalf}
           min={1}
+          data-testid="address-addressNumber-input"
         />
       </div>
       <div className={styles.flex}>
@@ -55,6 +57,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           onChange={handleChange}
           errorName="postalCode"
           className={styles.inputHalf}
+          data-testid="address-postalCode-input"
         />
         <FormInput
           type="text"
@@ -64,6 +67,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           onChange={handleChange}
           errorName="province"
           className={styles.inputHalf}
+          data-testid="address-province-input"
         />
       </div>
       <div className={styles.flex}>
@@ -75,6 +79,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           onChange={handleChange}
           errorName="city"
           className={styles.inputHalf}
+          data-testid="address-city-input"
         />
         <FormInput
           as="select"
@@ -84,6 +89,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
           errorName="country"
           className={styles.inputHalf}
           options={countryOptions}
+          data-testid="address-country-input"
         />
       </div>
       <div className={styles.flexAlignCenter}>
@@ -115,6 +121,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
         label="Salva"
         loadingLabel="Attendi..."
         className={styles.button}
+        data-testid="address-continue-button"
       />
     </FormStep>
   );

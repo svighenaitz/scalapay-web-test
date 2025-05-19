@@ -10,7 +10,7 @@ describe('Form validation and error state', () => {
     cy.get('input[name="email"]').type('not-an-email'); // Invalid email
     cy.get('input[name="firstName"]').type('Mario');
     cy.get('input[name="lastName"]').type('Rossi');
-    cy.get('[data-testid="account-birthDate-input"] input').type('01/01/1990').blur(); // Format: DD/MM/YYYY
+    cy.get('[data-testid="account-birthDate-input"] input').type('01/01/2020').blur(); // Format: DD/MM/YYYY
     cy.get('body').click(0,0);
     cy.get('input[name="taxCode"]').type('RSSMRA90A01H501U');
     
@@ -18,6 +18,7 @@ describe('Form validation and error state', () => {
 
     // Should see email format error, not errors for other fields
     cy.contains(validationMessages.email.invalid).should('be.visible');
+    cy.contains(validationMessages.birthDate.invalid).should('be.visible');
 
     // Optionally, check aria-invalid for email
     cy.get('input[name="email"]').should('have.attr', 'aria-invalid', 'true');
