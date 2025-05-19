@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  loading?: boolean;
-  label: string;
-  loadingLabel?: string;
-  className?: string;
-}
+import type { FormButtonProps } from '../types/form';
 
 const FormButton: React.FC<FormButtonProps> = ({ loading, label, loadingLabel, className, ...props }) => (
   <button type="submit" className={className} disabled={loading || props.disabled} {...props}>

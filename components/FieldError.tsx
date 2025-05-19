@@ -1,9 +1,7 @@
 import { useFormStore } from '../store/formSlice';
 import styles from './FieldError.module.css';
 
-interface FieldErrorProps {
-  name: string;
-}
+import type { FieldErrorProps } from '../types/form';
 
 export default function FieldError({ name }: FieldErrorProps) {
   const { errors } = useFormStore();

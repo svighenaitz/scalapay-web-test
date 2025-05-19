@@ -1,12 +1,7 @@
 import React from 'react';
 import FieldError from './FieldError';
 
-interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement> {
-  errorName: string;
-  as?: 'input' | 'select';
-  options?: { value: string; label: string }[];
-  className?: string;
-}
+import type { FormInputProps } from '../types/form';
 
 import { useFormStore } from '../store/formSlice';
 

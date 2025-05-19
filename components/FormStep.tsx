@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface FormStepProps {
-  heading: string;
-  children: React.ReactNode;
-  className?: string;
-}
+import type { FormStepProps } from '../types/form';
 
 const FormStep: React.FC<FormStepProps> = ({ heading, children, className }) => (
   <div className={className}>

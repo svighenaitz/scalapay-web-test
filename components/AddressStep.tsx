@@ -4,7 +4,7 @@ import styles from './AddressStep.module.css';
 import FormStep from './FormStep';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
-import { useFormFieldChange } from './useFormFieldChange';
+import { useFormFieldChange } from '../hooks/useFormFieldChange';
 
 const countryOptions = [
   { value: '', label: 'Seleziona Nazione' },
@@ -15,9 +15,7 @@ const countryOptions = [
   { value: 'FR', label: 'Francia' },
 ];
 
-interface AddressStepProps {
-  loading?: boolean;
-}
+import type { AddressStepProps } from '../types/form';
 
 const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
   const { address, errors, updateAddress, setError } = useFormStore();

@@ -9,14 +9,12 @@ import styles from './AccountStep.module.css';
 import FormStep from './FormStep';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
-import { useFormFieldChange } from './useFormFieldChange';
+import { useFormFieldChange } from '../hooks/useFormFieldChange';
 import FieldError from './FieldError';
 
 const MINIMUM_AGE = 18;
 
-interface AccountStepProps {
-  loading?: boolean;
-}
+import type { AccountStepProps } from '../types/form';
 
 const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
   const { account, errors, updateAccount, setError } = useFormStore();
