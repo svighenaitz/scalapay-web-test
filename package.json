@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
