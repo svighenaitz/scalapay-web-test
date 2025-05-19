@@ -1,27 +1,73 @@
 import { validateFiscalCode } from './validate';
 import { z } from 'zod';
 
+export const validationMessages = {
+  email: {
+    required: 'Email richiesta',
+    invalid: 'Email non valida',
+  },
+  taxCode: {
+    required: 'Codice fiscale richiesto',
+    invalid: 'Codice fiscale non valido',
+    notExists: 'Codice fiscale non valido o non esistente',
+  },
+  birthDate: {
+    required: 'Data di nascita richiesta',
+    invalidFormat: 'Formato data non valido (YYYY-MM-DD)',
+    invalid: 'Data non valida',
+  },
+  address: {
+    min: 'Indirizzo minimo 5 caratteri',
+    invalid: "L’indirizzo può contenere solo lettere, spazi, apostrofi e trattini",
+  },
+  addressNumber: {
+    required: 'Numero civico richiesto',
+    invalid: 'Numero civico richiesto',
+    notInt: 'Numero civico deve essere un intero',
+    min: 'Numero civico richiesto',
+  },
+  postalCode: {
+    required: 'CAP richiesto',
+  },
+  province: {
+    required: 'Provincia richiesta',
+  },
+  city: {
+    required: 'Città richiesta',
+  },
+  country: {
+    required: 'Nazione richiesta',
+    invalid: 'Nazione non valida',
+  },
+  firstName: {
+    min: 'Nome richiesto',
+    invalid: 'Il nome può contenere solo lettere, spazi, apostrofi e trattini',
+  },
+  lastName: {
+    min: 'Cognome richiesto',
+    invalid: 'Il cognome può contenere solo lettere, spazi, apostrofi e trattini',
+  },
+};
+
 export const emailSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(1, 'Email richiesta')
-    .email('Email non valida')
+    .min(1, validationMessages.email.required)
+    .email(validationMessages.email.invalid)
   );
-
-
 
 export const taxCodeSchema = z.string()
   .transform(val => val.trim().toUpperCase())
   .pipe(z.string()
-    .min(1, 'Codice fiscale richiesto')
+    .min(1, validationMessages.taxCode.required)
     .regex(
       /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$/,
-      'Codice fiscale non valido'
+      validationMessages.taxCode.invalid
     )
     .refine(
       async (val) => await validateFiscalCode(val),
       {
-        message: 'Codice fiscale non valido o non esistente'
+        message: validationMessages.taxCode.notExists
       }
     )
   );
@@ -29,13 +75,13 @@ export const taxCodeSchema = z.string()
 export const dateSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(1, 'Data di nascita richiesta')
+    .min(1, validationMessages.birthDate.required)
     .regex(
       /^\d{4}-\d{2}-\d{2}$/,
-      'Formato data non valido (YYYY-MM-DD)'
+      validationMessages.birthDate.invalidFormat
     )
     .refine(date => !isNaN(Date.parse(date)), {
-      message: 'Data non valida'
+      message: validationMessages.birthDate.invalid
     })
   );
 
@@ -45,32 +91,32 @@ const countryOptions = ["IT", "ES", "DE", "PT", "FR"] as const;
 export const addressSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(5, 'Indirizzo minimo 5 caratteri')
-    .regex(/^[A-Za-zÀ-ÿ'\- ]+$/, 'L’indirizzo può contenere solo lettere, spazi, apostrofi e trattini')
+    .min(5, validationMessages.address.min)
+    .regex(/^[A-Za-zÀ-ÿ'\- ]+$/, validationMessages.address.invalid)
   );
 
 export const addressNumberSchema = z.preprocess(
   (val) => typeof val === 'string' ? parseInt(val, 10) : val,
-  z.number({ invalid_type_error: 'Numero civico richiesto', required_error: 'Numero civico richiesto' })
-    .int('Numero civico deve essere un intero')
-    .min(1, 'Numero civico richiesto')
+  z.number({ invalid_type_error: validationMessages.addressNumber.invalid, required_error: validationMessages.addressNumber.required })
+    .int(validationMessages.addressNumber.notInt)
+    .min(1, validationMessages.addressNumber.min)
 );
 
 export const postalCodeSchema = z.string()
   .transform(val => val.trim())
-  .pipe(z.string().min(1, 'CAP richiesto'));
+  .pipe(z.string().min(1, validationMessages.postalCode.required));
 
 export const provinceSchema = z.string()
   .transform(val => val.trim())
-  .pipe(z.string().min(1, 'Provincia richiesta'));
+  .pipe(z.string().min(1, validationMessages.province.required));
 
 export const citySchema = z.string()
   .transform(val => val.trim())
-  .pipe(z.string().min(1, 'Città richiesta'));
+  .pipe(z.string().min(1, validationMessages.city.required));
 
 export const countrySchema = z.enum(countryOptions, {
-  required_error: 'Nazione richiesta',
-  invalid_type_error: 'Nazione non valida',
+  required_error: validationMessages.country.required,
+  invalid_type_error: validationMessages.country.invalid,
 });
 
 export const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]+$/;
@@ -78,15 +124,15 @@ export const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]+$/;
 export const firstNameSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(2, 'Nome richiesto')
-    .regex(nameRegex, 'Il nome può contenere solo lettere, spazi, apostrofi e trattini')
+    .min(2, validationMessages.firstName.min)
+    .regex(nameRegex, validationMessages.firstName.invalid)
   );
 
 export const lastNameSchema = z.string()
   .transform(val => val.trim())
   .pipe(z.string()
-    .min(2, 'Cognome richiesto')
-    .regex(nameRegex, 'Il cognome può contenere solo lettere, spazi, apostrofi e trattini')
+    .min(2, validationMessages.lastName.min)
+    .regex(nameRegex, validationMessages.lastName.invalid)
   );
 
 // Combined schemas

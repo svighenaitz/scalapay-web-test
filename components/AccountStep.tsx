@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { accountStepPlaceholders } from './accountStepPlaceholders';
 import { useFormStore } from '../store/formSlice';
 import DatePicker from 'react-datepicker';
 import { it } from 'date-fns/locale';
@@ -40,34 +41,37 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
   return (
     <FormStep heading="Crea account">
       <FormInput
-        type="email"
+        type="text"
         name="email"
-        placeholder="Email"
+        placeholder={accountStepPlaceholders.find(f => f.name === 'email')!.placeholder}
         value={account.email}
         onChange={handleAccountChange}
         errorName="email"
         className={styles.inputFull}
+        data-testid="account-email-input"
       />
       <FormInput
         type="text"
         name="firstName"
-        placeholder="Nome"
+        placeholder={accountStepPlaceholders.find(f => f.name === 'firstName')!.placeholder}
         value={account.firstName}
         onChange={handleAccountChange}
         errorName="firstName"
         className={styles.inputFull}
+        data-testid="account-firstName-input"
       />
       <FormInput
         type="text"
         name="lastName"
-        placeholder="Cognome"
+        placeholder={accountStepPlaceholders.find(f => f.name === 'lastName')!.placeholder}
         value={account.lastName}
         onChange={handleAccountChange}
         errorName="lastName"
         className={styles.inputFull}
+        data-testid="account-lastName-input"
       />
       <div>
-        <div className={styles['date-picker-container']}>
+        <div className={styles['date-picker-container']} data-testid="account-birthDate-input">
           <DatePicker
             selected={account.birthDate ? new Date(account.birthDate) : null}
             onChange={(date: Date | null) => {
@@ -82,7 +86,7 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
               }
             }}
             dateFormat="dd/MM/yyyy"
-            placeholderText="Seleziona data di nascita"
+            placeholderText={accountStepPlaceholders.find(f => f.name === 'birthDate')!.placeholder}
             className={`date-picker ${errors.birthDate ? styles['error-border'] : ''}`}
             locale={it}
             showYearDropdown
@@ -97,7 +101,7 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
             selectsStart
             startDate={account.birthDate ? new Date(account.birthDate) : null}
             adjustDateOnChange
-            openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}
+            openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}            
           />
         </div>
         {/* Keep FieldError for birthDate for clarity */}
@@ -107,17 +111,19 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
       <FormInput
         type="text"
         name="taxCode"
-        placeholder="Codice Fiscale"
+        placeholder={accountStepPlaceholders.find(f => f.name === 'taxCode')!.placeholder}
         value={account.taxCode}
         onChange={handleAccountChange}
         errorName="taxCode"
         className={styles.inputFull}
+        data-testid="account-taxCode-input"
       />
       <FormButton
         loading={loading}
         label="Continua"
         loadingLabel="Attendi..."
         className={styles.button}
+        data-testid="account-continue-button"
       />
     </FormStep>
   );
