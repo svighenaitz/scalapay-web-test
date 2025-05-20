@@ -2,6 +2,10 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 16px;
+  background-color: #F6F7FB;
+  height: 100vh;
+  position: relative;
+  z-index: 0;
 }
 
 .heading {
@@ -56,5 +60,4 @@
   background: #F9DCDE;
   border-radius: 50%;
   z-index: -1;
-  pointer-events: none;
 }

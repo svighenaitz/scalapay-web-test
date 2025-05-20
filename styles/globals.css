@@ -1,5 +1,5 @@
 :root {
-  --background: #F6F7FB;
+  --background: #fff;
   --foreground: #171717;
 }
 
@@ -45,4 +45,8 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }
