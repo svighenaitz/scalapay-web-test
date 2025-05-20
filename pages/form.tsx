@@ -7,6 +7,7 @@ import { validateAccount, validateAddress } from '../validation/validate';
 import AccountStep from '../components/AccountStep';
 import AddressStep from '../components/AddressStep';
 import formStyles from '../components/Form.module.css';
+import Image from 'next/image';
 
 const Form: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
@@ -106,7 +107,7 @@ const Form: React.FC = () => {
     <div className={formStyles.container} style={{ position: 'relative', overflow: 'hidden' }}>
       <div className={formStyles.backgroundCircle} aria-hidden="true" />
       <div className={formStyles.heading}>
-        <img src="/Union.svg" alt="Logo" />        
+        <Image src="/Union.svg" alt="Logo" width={110} height={35} />        
       </div>
       <div className={formStyles.cardWrapper}>
         <div className={formStyles.card}>

@@ -87,7 +87,7 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
               }}
               dateFormat="dd/MM/yyyy"
               placeholderText={accountStepPlaceholders.find(f => f.name === 'birthDate')!.placeholder}
-              className={`date-picker ${errors.birthDate ? styles['error-border'] : ''}`}
+              className={`${styles.datePickerFullWidth} ${errors.birthDate ? styles['error-border'] : ''}` }
               locale={it}
               showYearDropdown
               scrollableYearDropdown

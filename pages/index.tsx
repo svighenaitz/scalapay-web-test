@@ -3,6 +3,7 @@ import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import React from 'react';
 
+
 const Home: React.FC = () => {
   return (
     <>
@@ -14,7 +15,7 @@ const Home: React.FC = () => {
       </Head>
       <div className={styles.page}>
         <main className={styles.main}>
-          <h1>Welcome to Scalapay Form Test</h1>
+          <h1 className={styles.heading}>Welcome to Scalapay Form Test</h1>
           <Link href={{ pathname: '/form', query: { step: 1 } }}>START FILLING FORM</Link>
         </main>
         <footer className={styles.footer}>
