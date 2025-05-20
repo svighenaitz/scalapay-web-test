@@ -103,10 +103,13 @@ const Form: React.FC = () => {
 };
 
   return (
-    <div className={formStyles.container}>
-      <h2 className={formStyles.heading}>Secure checkout <span role="img" aria-label="love">♥</span> scalapay</h2>
-      <div className={formStyles.card}>
-        <div className={formStyles.merchant}>
+    <div className={formStyles.container} style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className={formStyles.backgroundCircle} aria-hidden="true" />
+      <div className={formStyles.heading}>
+        <img src="/Union.svg" alt="Logo" />        
+      </div>
+      <div className={formStyles.cardWrapper}>
+        <div className={formStyles.card}>
           <b className={formStyles.merchantTitle}>Merchant</b>
           <div className={formStyles.merchantDesc}>Paga il tuo ordine in un massimo di 36 rate</div>
         </div>

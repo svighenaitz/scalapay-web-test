@@ -7,14 +7,29 @@
 .heading {
   font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-top: 44px;
+  display: flex;
+  height: 65px;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .card {
   background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 8px #0001;
+  border-radius: 20px;
+  padding: 16px 24px;  
+}
+
+.cardVariant {
+  background: #fff;
+  border-radius: 20px;
+  padding: 12px 13px;  
 }
 
 .merchant {
@@ -23,8 +38,23 @@
 
 .merchantTitle {
   font-weight: bold;
+  color: #272727;
+  font-size: 16px;
 }
 
 .merchantDesc {
-  font-size: 14px;  
+  font-size: 12px;  
+  color: #61666A;
+}
+
+.backgroundCircle {
+  position: absolute;
+  width: 1611px;
+  height: 1560px;
+  top: -1363px;
+  left: -593px;
+  background: #F9DCDE;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
 }

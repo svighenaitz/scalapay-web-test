@@ -37,93 +37,97 @@ const AccountStep: React.FC<AccountStepProps> = ({ loading = false }) => {
     : false;
 
   return (
-    <FormStep heading="Crea account">
-      <FormInput
-        type="text"
-        name="email"
-        placeholder={accountStepPlaceholders.find(f => f.name === 'email')!.placeholder}
-        value={account.email}
-        onChange={handleAccountChange}
-        errorName="email"
-        className={styles.inputFull}
-        data-testid="account-email-input"
-      />
-      <FormInput
-        type="text"
-        name="firstName"
-        placeholder={accountStepPlaceholders.find(f => f.name === 'firstName')!.placeholder}
-        value={account.firstName}
-        onChange={handleAccountChange}
-        errorName="firstName"
-        className={styles.inputFull}
-        data-testid="account-firstName-input"
-      />
-      <FormInput
-        type="text"
-        name="lastName"
-        placeholder={accountStepPlaceholders.find(f => f.name === 'lastName')!.placeholder}
-        value={account.lastName}
-        onChange={handleAccountChange}
-        errorName="lastName"
-        className={styles.inputFull}
-        data-testid="account-lastName-input"
-      />
-      <div>
-        <div className={styles['date-picker-container']} data-testid="account-birthDate-input">
-          <DatePicker
-            selected={account.birthDate ? new Date(account.birthDate) : null}
-            onChange={(date: Date | null) => {
-              if (errors.birthDate) setError('birthDate', '');
-              updateAccount({ birthDate: date ? date.toISOString().split('T')[0] : '' });
-            }}
-            onBlur={() => {
-              if (!account.birthDate) {
-                setError('birthDate', 'Data di nascita richiesta');
-              } else if (!isOver18) {
-                setError('birthDate', `Devi avere almeno ${MINIMUM_AGE} anni`);
-              }
-            }}
-            dateFormat="dd/MM/yyyy"
-            placeholderText={accountStepPlaceholders.find(f => f.name === 'birthDate')!.placeholder}
-            className={`date-picker ${errors.birthDate ? styles['error-border'] : ''}`}
-            locale={it}
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={100}
-            minDate={minDate}
-            maxDate={maxDate}
-            showMonthDropdown
-            dropdownMode="select"
-            isClearable
-            yearItemNumber={100}
-            selectsStart
-            startDate={account.birthDate ? new Date(account.birthDate) : null}
-            adjustDateOnChange
-            openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}            
-          />
+    <>
+      <FormStep heading="Crea account">
+      <div className={styles.formInputsColumn}>
+        <FormInput
+          type="text"
+          name="email"
+          placeholder={accountStepPlaceholders.find(f => f.name === 'email')!.placeholder}
+          value={account.email}
+          onChange={handleAccountChange}
+          errorName="email"
+          className={styles.inputFull}
+          data-testid="account-email-input"
+        />
+        <FormInput
+          type="text"
+          name="firstName"
+          placeholder={accountStepPlaceholders.find(f => f.name === 'firstName')!.placeholder}
+          value={account.firstName}
+          onChange={handleAccountChange}
+          errorName="firstName"
+          className={styles.inputFull}
+          data-testid="account-firstName-input"
+        />
+        <FormInput
+          type="text"
+          name="lastName"
+          placeholder={accountStepPlaceholders.find(f => f.name === 'lastName')!.placeholder}
+          value={account.lastName}
+          onChange={handleAccountChange}
+          errorName="lastName"
+          className={styles.inputFull}
+          data-testid="account-lastName-input"
+        />
+        <div>
+          <div className={styles['date-picker-container']} data-testid="account-birthDate-input">
+            <DatePicker
+              selected={account.birthDate ? new Date(account.birthDate) : null}
+              onChange={(date: Date | null) => {
+                if (errors.birthDate) setError('birthDate', '');
+                updateAccount({ birthDate: date ? date.toISOString().split('T')[0] : '' });
+              }}
+              onBlur={() => {
+                if (!account.birthDate) {
+                  setError('birthDate', 'Data di nascita richiesta');
+                } else if (!isOver18) {
+                  setError('birthDate', `Devi avere almeno ${MINIMUM_AGE} anni`);
+                }
+              }}
+              dateFormat="dd/MM/yyyy"
+              placeholderText={accountStepPlaceholders.find(f => f.name === 'birthDate')!.placeholder}
+              className={`date-picker ${errors.birthDate ? styles['error-border'] : ''}`}
+              locale={it}
+              showYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={100}
+              minDate={minDate}
+              maxDate={maxDate}
+              showMonthDropdown
+              dropdownMode="select"
+              isClearable
+              yearItemNumber={100}
+              selectsStart
+              startDate={account.birthDate ? new Date(account.birthDate) : null}
+              adjustDateOnChange
+              openToDate={account.birthDate ? new Date(account.birthDate) : defaultViewDate}            
+            />
+          </div>
+          {/* Keep FieldError for birthDate for clarity */}
+          {/* You could also wrap this in a FormInput abstraction if needed */}
+          <FieldError name="birthDate" />
         </div>
-        {/* Keep FieldError for birthDate for clarity */}
-        {/* You could also wrap this in a FormInput abstraction if needed */}
-        <FieldError name="birthDate" />
+        <FormInput
+          type="text"
+          name="taxCode"
+          placeholder={accountStepPlaceholders.find(f => f.name === 'taxCode')!.placeholder}
+          value={account.taxCode}
+          onChange={handleAccountChange}
+          errorName="taxCode"
+          className={styles.inputFull}
+          data-testid="account-taxCode-input"
+        />
       </div>
-      <FormInput
-        type="text"
-        name="taxCode"
-        placeholder={accountStepPlaceholders.find(f => f.name === 'taxCode')!.placeholder}
-        value={account.taxCode}
-        onChange={handleAccountChange}
-        errorName="taxCode"
-        className={styles.inputFull}
-        data-testid="account-taxCode-input"
-      />
-      <FormButton
-        loading={loading}
-        label="Continua"
-        loadingLabel="Attendi..."
-        className={styles.button}
-        data-testid="account-continue-button"
-      />
     </FormStep>
+    <FormButton
+      loading={loading}
+      label="Continua"
+      loadingLabel="Attendi..."
+      className={styles.bottomButton}
+      data-testid="account-continue-button"
+    />
+    </>
   );
 };
 
