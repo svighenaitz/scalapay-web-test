@@ -1,3 +1,11 @@
+
+<p float="left">
+  <img src="public/perf.png" width="350" />
+  <img src="public/a11y.png" width="400" />
+</p>
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
 ## Getting Started
