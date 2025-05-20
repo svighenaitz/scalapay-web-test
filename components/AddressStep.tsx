@@ -91,8 +91,11 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
               options={countryOptions}
               data-testid="address-country-input"
             />
-          <div className={styles.flexAlignCenter}>
-            <label className={styles.label} htmlFor="currentlyLiveHere">
+          <div className={styles.checkboxesGroup}>
+            <div className={styles.flexAlignCenter}>
+              <label className={styles.label} htmlFor="currentlyLiveHere">
+                I currently live here
+              </label>
               <FormInput
                 id="currentlyLiveHere"
                 type="checkbox"
@@ -101,9 +104,11 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
                 onChange={handleChange}
                 errorName="currentlyLiveHere"
               />
-              I currently live here
-            </label>
-            <label className={styles.label} htmlFor="isPEP">
+            </div>
+            <div className={styles.flexAlignCenter}>
+              <label className={styles.label} htmlFor="isPEP">
+                Dichiaro di essere una PEP
+              </label>
               <FormInput
                 id="isPEP"
                 type="checkbox"
@@ -112,8 +117,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
                 onChange={handleChange}
                 errorName="isPEP"
               />
-              Dichiaro di essere una PEP
-            </label>
+            </div>
           </div>
         </div>
       </FormStep>

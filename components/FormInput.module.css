@@ -19,3 +19,60 @@
   color: rgba(58, 64, 69, 0.38);
 }
 
+/* Switch (toggle) styles for custom checkbox UI */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 32px;
+  vertical-align: middle;
+}
+
+.switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+  transition: background 0.3s;
+  display: block;
+}
+
+.switchInput:checked + .slider {
+  background-color: #a5b4fc;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(60,60,60,0.15);
+  border-radius: 50%;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.switchInput:checked + .slider:before {
+  transform: translateX(14px) translateY(-50%);
+  background-color: #5867ef;
+  box-shadow: 0 4px 12px 0 rgba(88,103,239,0.25);
+}
+
+/* Optional: focus ring */
+.switchInput:focus + .slider {
+  box-shadow: 0 0 0 2px #a5b4fc;
+}

@@ -22,11 +22,24 @@ const FormInput: React.FC<FormInputProps> = ({ errorName, as = 'input', options,
           ))}
         </select>
       ) : (
-        <input
-          {...props}
-          className={className ? `${styles.inputFullWidth} ${className}` : styles.inputFullWidth}
-          aria-invalid={hasError}
-        />
+        props.type === 'checkbox' ? (
+          <label className={styles.switch}>
+            <input
+              type="checkbox"
+              checked={props.checked}
+              onChange={props.onChange}
+              className={styles.switchInput}
+              {...props}
+            />
+            <span className={styles.slider}></span>
+          </label>
+        ) : (
+          <input
+            {...props}
+            className={className ? `${styles.inputFullWidth} ${className}` : styles.inputFullWidth}
+            aria-invalid={hasError}
+          />
+        )
       )}
       <FieldError name={errorName} />
     </div>
