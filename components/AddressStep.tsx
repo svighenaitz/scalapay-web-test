@@ -7,7 +7,8 @@ import FormInput from './FormInput';
 import FormButton from './FormButton';
 import { useFormFieldChange } from '../hooks/useFormFieldChange';
 
-const countryOptions = [  
+const countryOptions = [
+  { value: '', label: 'Nazione' },
   { value: 'IT', label: 'Italia' },
   { value: 'ES', label: 'Spagna' },
   { value: 'DE', label: 'Germania' },

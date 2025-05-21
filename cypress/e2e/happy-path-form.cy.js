@@ -16,7 +16,7 @@ describe('Happy path form submission', () => {
     cy.get('[data-testid="address-addressNumber-input"]').type('1');
     cy.get('[data-testid="address-postalCode-input"]').type('00100');
     cy.get('[data-testid="address-city-input"]').type('Roma');
-    cy.get('[data-testid="address-country-input"]').select('IT');
+    cy.get('[data-testid="address-country-input"]').select('ES');
     cy.get('[data-testid="address-province-input"]').type('RM');
     cy.get('[data-testid="address-continue-button"]').click();
 
