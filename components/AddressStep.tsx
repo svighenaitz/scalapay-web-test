@@ -7,8 +7,7 @@ import FormInput from './FormInput';
 import FormButton from './FormButton';
 import { useFormFieldChange } from '../hooks/useFormFieldChange';
 
-const countryOptions = [
-  { value: '', label: 'Nazione' },
+const countryOptions = [  
   { value: 'IT', label: 'Italia' },
   { value: 'ES', label: 'Spagna' },
   { value: 'DE', label: 'Germania' },
@@ -87,7 +86,7 @@ const AddressStep: React.FC<AddressStepProps> = ({ loading = false }) => {
               value={address.country}
               onChange={handleChange}
               errorName="country"
-              className={styles.inputFull}
+              className={`${styles.inputFull} ${styles.selectCountry}`}
               options={countryOptions}
               data-testid="address-country-input"
             />
